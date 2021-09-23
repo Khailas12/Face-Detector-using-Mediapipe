@@ -34,8 +34,7 @@ with mp_face_detection.FaceDetection(
         
 
 # webcam input
-cap =  cv2.VideoCapture(0)
-
+cap = cv2.VideoCapture(0)
 with mp_face_detection.FaceDetection(
     model_selection=0, min_detection_confidence=0.5
 ) as face_detection:
@@ -44,17 +43,13 @@ with mp_face_detection.FaceDetection(
         success, image = cap.read()
         
         if not success:
-            print('ignoring empty camera frame')
+            print('Ignoring empty camera frame')
             continue
         
-        
-        # flip img horizontally and converting BGR img to RGB
         image = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
         image.flags.writeable = False
         results = face_detection.process(image)
         
-        
-        # drawing the face detection annotations 
         image.flags.writeable = True
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         
@@ -62,9 +57,9 @@ with mp_face_detection.FaceDetection(
             for detection in results.detections:
                 mp_drawing.draw_detection(image, detection)
                 
-            cv2.imshow('face detector', image)
-            
-            if cv2.waitKey(5) & 0xFF == 27:
-                break
-            
-cap.release()            
+        cv2.imshow('Face Detector', image)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+
+cap.release() 
