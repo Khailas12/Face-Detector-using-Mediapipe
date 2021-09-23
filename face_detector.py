@@ -35,7 +35,7 @@ class FaceDetector:
                     print('ignoring empty camera frame')
                     continue
                 
-                self.image_rgb = cv2.cvtColor(cv2.flip(camera, 1), cv2.COLOR_BGR2RGB)
+                self.camera = cv2.cvtColor(cv2.flip(camera, 1), cv2.COLOR_BGR2RGB)
                 
                 camera.flags.writeable = False
                 self.results = face_detection.process(camera)

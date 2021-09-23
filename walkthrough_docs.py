@@ -49,7 +49,7 @@ with mp_face_detection.FaceDetection(
         
         
         # flip img horizontally and converting BGR img to RGB
-        img = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
+        image = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
         image.flags.writeable = False
         results = face_detection.process(image)
         
