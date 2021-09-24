@@ -1,4 +1,3 @@
-# from camera_position import camera_position
 from face_det import FaceDetector
 import concurrent.futures
 import time
