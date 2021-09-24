@@ -42,8 +42,8 @@ class FaceDetector():
         camera.flags.writeable = True
         camera = cv2.cvtColor(camera, cv2.COLOR_RGB2BGR)
         
-        if self.results.detections:
-            for detection in self.results.detections:
+        if self.results.multi_face_landmarks:
+            for detection in self.results.multi_face_landmarks:
                 if draw:
                     self.mp_drawing.mp_drawing(camera, self.mp_face_detector, detection)
                         
@@ -53,8 +53,8 @@ class FaceDetector():
     def camera_position(self, camera, face_num=0, draw=True):
         land_mark_list = []
     
-        if self.results.detections:
-            my_camera = self.results.detections[face_num]
+        if self.results.multi_face_landmarks:
+            my_camera = self.results.multi_face_landmarks[face_num]
             
             for id, lm in enumerate(my_camera.landmark):
                 height, width, channels = camera.shape
