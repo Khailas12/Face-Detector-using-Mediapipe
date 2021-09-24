@@ -55,7 +55,7 @@ class FaceDetector:
                         break
                     
         cap.release()
-        # cv2.destroyAllWindows() 
+        cv2.destroyAllWindows() 
         
         
     def camera_position(self, camera, face_num=0, draw=True):
