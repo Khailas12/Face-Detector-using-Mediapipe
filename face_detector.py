@@ -1,8 +1,6 @@
 import mediapipe as mp
 import concurrent.futures
 import cv2
-import time
-
 
 
 class FaceDetector:
@@ -18,9 +16,6 @@ class FaceDetector:
         
         self.mp_face_detector = mp.solutions.face_detection
         self.mp_drawing = mp.solutions.drawing_utils
-        
-        previous_time = 0
-        current_time = 0
         
         cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
 
