@@ -64,5 +64,3 @@ if __name__ == "__main__":
     with concurrent.futures.ThreadPoolExecutor() as executor:
         with MainDet() as fd:
             executor.map(fd.main())
-            executor.map(fd.find_face())
-            executor.map(fd.camera_position())
