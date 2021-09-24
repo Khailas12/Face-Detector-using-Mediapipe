@@ -22,20 +22,21 @@ class FaceDetector:
         previous_time = 0
         current_time = 0
         
-        cam = cv2.VideoCapture(0)
+        cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+
         
         with self.mp_face_detector.FaceDetection(
             model_selection=0, min_detection_confidence=0.5
             ) as face_detection:
             
-            while cam.isOpened():
-                success, camera = cam.read()
+            while cap.isOpened():
+                success, camera = cap.read()
                 
                 if not success:
-                    print('ignoring empty camera frame')
+                    raise IOError('ignoring empty camera frame')
                     continue
                 
-                camera_rgb = cv2.cvtColor(cv2.flip(camera, 1), cv2.COLOR_BGR2RGB)
+                camera = cv2.cvtColor(cv2.flip(camera, 1), cv2.COLOR_BGR2RGB)
                 
                 camera.flags.writeable = False
                 self.results = face_detection.process(camera)
@@ -53,7 +54,8 @@ class FaceDetector:
                     if cv2.waitKey(1) & 0xFF==ord("q"):
                         break
                     
-        cam.release()
+        cap.release()
+        # cv2.destroyAllWindows() 
         
         
     def camera_position(self, camera, face_num=0, draw=True):
@@ -74,8 +76,8 @@ class FaceDetector:
     def __exit__(self, type, value, traceback):
         return isinstance(value, TypeError)
     
-        
-                  
+
+                
 if __name__ == "__main__":
     with concurrent.futures.ThreadPoolExecutor() as executor:
         
